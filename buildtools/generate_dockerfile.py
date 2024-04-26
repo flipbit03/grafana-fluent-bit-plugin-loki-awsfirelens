@@ -14,10 +14,13 @@ DOCKERHUB_IMAGE = f"{DOCKER_BASE.replace("/", "-")}-{int(time.time())}-cogram"
 DOCKERHUB_IMAGE_TO_PUSH = f"{DOCKERHUB_USERNAME}/{DOCKERHUB_IMAGE}"
 
 
-def build_docker(base_image: str, files: list[CopyFile]) -> str:
+def build_docker(base_image: str, files: list[CopyFile], config_file_path_for_fluent_bit: str) -> str:
     out = [f"FROM {base_image}\n"]
     for file in files:
         out.extend(file.render())
+
+    # Generate updated CMD
+    out.append(f"CMD [\"/fluent-bit/bin/fluent-bit\", \"-c\", \"{config_file_path_for_fluent_bit}\"]")
 
     return "\n".join(out).strip()
 
@@ -31,7 +34,7 @@ if __name__ == "__main__":
             fp = f.relative_to(PROJECT_ROOT)
             copyfiles.append(CopyFile(fp, fp))
 
-    tpl = build_docker(DOCKER_BASE, copyfiles)
+    tpl = build_docker(DOCKER_BASE, copyfiles, "/fluent-bit/etc/fluent-bit-alt.conf")
 
     DOCKERFILE_PATH = PROJECT_ROOT / "Dockerfile"
     DOCKERFILE_PATH.write_text(tpl)

@@ -1,0 +1,47 @@
+{
+    "text": "2024-04-26 07:28:27.213 | DEBUG    | sqlalchemy.pool.base:_close_connection:367 - Closing connection <connection object at 0x7f6f3af8c400; dsn: 'user=cogram password=xxx dbname=cogram host=db.rds.dev3.cogram.com port=5432', closed: 0>\n",
+    "record": {
+      "elapsed": {
+        "repr": "4:06:47.904849",
+        "seconds": 14807.904849
+      },
+      "exception": null,
+      "extra": {
+        "bot_id": null,
+        "meeting_id": null,
+        "user_id": "29c14f0d-8d0d-4397-b828-6a8198018010",
+        "user_email": "cadu@cogram.com"
+      },
+      "file": {
+        "name": "base.py",
+        "path": "/opt/.cache/virtualenvs/cogram-9TtSrW0h-py3.12/lib/python3.12/site-packages/sqlalchemy/pool/base.py"
+      },
+      "function": "_close_connection",
+      "level": {
+        "icon": "🐞",
+        "name": "DEBUG",
+        "no": 10
+      },
+      "line": 367,
+      "message": "Closing connection <connection object at 0x7f6f3af8c400; dsn: 'user=cogram password=xxx dbname=cogram host=db.rds.dev3.cogram.com port=5432', closed: 0>",
+      "module": "base",
+      "name": "sqlalchemy.pool.base",
+      "process": {
+        "id": 182,
+        "name": "SpawnProcess-10"
+      },
+      "thread": {
+        "id": 140115706902208,
+        "name": "AnyIO worker thread"
+      },
+      "time": {
+        "repr": "2024-04-26 07:28:27.213827+00:00",
+        "timestamp": 1714116507.213827
+      }
+    },
+    "container_name": "cogram",
+    "source": "stdout",
+    "ecs_cluster": "cogram-dev-3",
+    "ecs_task_arn": "arn:aws:ecs:eu-central-1:856788503708:task/cogram-dev-3/3647063ae13f4c1e96b565b1c87722fd",
+    "ecs_task_definition": "cogram-dev-3:59"
+  }
