@@ -1,9 +1,18 @@
 import os
 from pathlib import Path
+import time
 from buildtools.paths import PROJECT_ROOT
 from buildtools.structs import CopyFile
 
+# Input Docker Image Params
 DOCKER_BASE = "fluent/fluent-bit:3.0.2"
+
+# Output Docker Image Params
+DOCKERHUB_USERNAME = "flipbit03"
+# Get a timestamp of seconds from epoch
+DOCKERHUB_IMAGE = f"{DOCKER_BASE.replace("/", "-")}-{int(time.time())}-cogram"
+DOCKERHUB_IMAGE_TO_PUSH = f"{DOCKERHUB_USERNAME}/{DOCKERHUB_IMAGE}"
+
 
 def build_docker(base_image: str, files: list[CopyFile]) -> str:
     out = [f"FROM {base_image}\n"]
@@ -28,10 +37,6 @@ if __name__ == "__main__":
     DOCKERFILE_PATH.write_text(tpl)
     print(f"Written to {DOCKERFILE_PATH}")
 
-    # Build the Docker image
-    DOCKERHUB_USERNAME = "flipbit03"
-    DOCKERHUB_IMAGE = DOCKER_BASE.replace("/", "-") + "-cogram"
-    DOCKERHUB_IMAGE_TO_PUSH = f"{DOCKERHUB_USERNAME}/{DOCKERHUB_IMAGE}"
 
     os.system(f"docker build . -t {DOCKERHUB_IMAGE_TO_PUSH}")
     print(f"Built Docker image {DOCKERHUB_IMAGE_TO_PUSH}")
